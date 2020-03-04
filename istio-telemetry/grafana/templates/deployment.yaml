@@ -15,8 +15,6 @@ spec:
     metadata:
       labels:
         app: grafana
-        chart: grafana
-        heritage: Tiller
         release: istio-system
       annotations:
         sidecar.istio.io/inject: "false"

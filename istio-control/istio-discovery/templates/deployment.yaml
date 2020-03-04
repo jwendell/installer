@@ -44,9 +44,7 @@ spec:
         istio: pilot
         {{- end }}
 {{- if eq .Release.Namespace "istio-system"}}
-        heritage: Tiller
         release: istio
-        chart: pilot
 {{- end }}
       annotations:
         sidecar.istio.io/inject: "false"

@@ -22,9 +22,7 @@ spec:
         app: galley
         istio: galley
 {{- if eq .Release.Namespace "istio-system"}}
-        heritage: Tiller
         release: istio
-        chart: galley
 {{- end }}
       annotations:
         sidecar.istio.io/inject: "false"

@@ -24,9 +24,7 @@ spec:
         app: sidecarInjectorWebhook
         istio: sidecar-injector
 {{- if eq .Release.Namespace "istio-system"}}
-        heritage: Tiller
         release: istio
-        chart: sidecarInjectorWebhook
 {{- end }}
       annotations:
         sidecar.istio.io/inject: "false"

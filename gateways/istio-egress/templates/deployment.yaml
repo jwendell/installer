@@ -27,9 +27,7 @@ spec:
       labels:
 {{ $labels | toYaml | indent 8 }}
 {{- if eq .Release.Namespace "istio-system"}}
-        heritage: Tiller
         release: istio
-        chart: gateways
 {{- end }}
       annotations:
         sidecar.istio.io/inject: "false"
@@ -37,6 +35,7 @@ spec:
 {{ toYaml $gateway.podAnnotations | indent 8 }}
 {{ end }}
     spec:
+      serviceAccountName: istio-egressgateway-service-account
 {{- if .Values.global.priorityClassName }}
       priorityClassName: "{{ .Values.global.priorityClassName }}"
 {{- end }}
@@ -250,7 +249,7 @@ spec:
       {{- else }}
       - name: istio-certs
         secret:
-          secretName: istio.default
+          secretName: istio.istio-egressgateway-service-account
           optional: true
       {{- end }}
       {{- range $gateway.secretVolumes }}

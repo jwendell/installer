@@ -23,6 +23,9 @@ spec:
       labels:
         app: citadel
         istio: citadel
+{{- if eq .Release.Namespace "istio-system"}}
+        release: istio
+{{- end }}
       annotations:
         sidecar.istio.io/inject: "false"
         {{- if .Values.security.podAnnotations }}
@@ -49,6 +52,7 @@ spec:
           {{- else }}
             - --custom-dns-names={{ range $k,$v := .Values.security.dnsCerts }}{{ $k }}:{{ $v }},{{ end }}
           {{- end }}
+            - --monitoring-port=15014
           {{- if .Values.security.selfSigned }}
             - --self-signed-ca=true
           {{- else }}
